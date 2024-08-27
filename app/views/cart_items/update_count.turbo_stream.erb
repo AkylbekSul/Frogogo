@@ -1,0 +1,19 @@
+<%= turbo_stream.update "cart_items" do %>
+  <%= render "cart_items", cart: cart_item.cart %>
+<% end %>
+
+<% if cart_item.destroyed? %>
+  <%= turbo_stream.remove "cart_item_#{cart_item.id}" %>
+<% else %>
+  <%= turbo_stream.update "cart_item_quantity#{cart_item.id}" do %>
+    <%= render "cart_item_amount", cart_item: cart_item %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.update "product_price_#{cart_item.id}" do %>
+  <%= number_to_currency(cart_item.product.price * cart_item.quantity) %>
+<% end %>
+
+<%= turbo_stream.update "cart_total" do %>
+  <%= number_to_currency(cart_item.cart.total_amount) %>
+<% end %>

@@ -1,0 +1,16 @@
+<div class="flex flex-row gap-1">
+  <div>
+    <%= image_tag product.image if product.image.attached? %>
+  </div>
+  <div id="<%= dom_id product %>" class="flex flex-row items-center justify-between grow">
+    <p class="my-5">
+      <%= product.name %>
+    </p>
+
+    <p class="my-5">
+      <strong class="block font-medium mb-1">Price:</strong>
+      <%= product.price %>
+    </p>
+
+  </div>
+</div>
